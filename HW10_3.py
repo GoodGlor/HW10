@@ -5,7 +5,7 @@ import uuid
 class Authorization:
     def __init__(self):
         self.user = []
-        self.wb = openpyxl.load_workbook('D:\Projects\Cursor\HW10/user.xlsx')
+        self.wb = openpyxl.load_workbook('user.xlsx')
         self.sheet = self.wb.active
 
     def check_email(self):

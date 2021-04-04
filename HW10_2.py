@@ -13,7 +13,7 @@ class ErrorMail(Exception):
 class Registration:
     def __init__(self):
         self.user = []
-        self.wb = openpyxl.load_workbook('D:\Projects\Cursor\HW10/user.xlsx')
+        self.wb = openpyxl.load_workbook('user.xlsx')
         self.sheet = self.wb.active
 
     def user_name(self):
@@ -68,6 +68,6 @@ class Registration:
             else:
                 Registration.user_pasw(self)
                 self.sheet.append(self.user)
-                self.wb.save('D:\Projects\Cursor\HW10/user.xlsx')
+                self.wb.save('user.xlsx')
                 print('200')
                 break
