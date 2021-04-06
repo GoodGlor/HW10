@@ -3,22 +3,39 @@ import unittest
 from unittest.mock import patch
 
 
+
+
 class TestAuthorization(unittest.TestCase):
-    auth = Authorization()
+
 
     def test_check_email(self):
         emails = ['email@asd', 1234, 'ASDASD@GMAIL.COM', 1.123, '123.123@MAIL.UA']
         for email in emails:
             with patch('builtins.input', return_value=email):
-                print(email)
-                assert self.auth.check_email() == False
+                auth = Authorization()
+                assert auth.check_email() == False
 
 
     def test_check_password(self):
-        paswds = ['email@asd', 12, 'ASDASD@GMAIL.COM', 1.123, '123.123@MAIL.UA', 'asdd1', '!```*7123']
-        for pasw in paswds:
-            with patch('builtins.input', return_value=pasw):
-                print(pasw)
-                assert self.auth.check_password() == False
+        password1 = {'jon@gmail.com':'email@asd'}
+        password2 ={'jon@gmail.com': 12}
+        password3 = {'jon@gmail.com':'ASDASD@GMAIL.COM'}
+
+        passwords = [password1, password2, password3]
+
+        for password in passwords:
+            for paswd in password:
+                with patch('builtins.input', return_value=paswd):
+                    auth = Authorization()
+                    assert auth.check_password() == False
+
+
+
+    def test_authorization(self):
+        self.email = ['jon@gmail.com', '1234q']
+        with patch('builtins.input', side_effect=self.email):
+            auth = Authorization()
+            auth.check_all()
+
 
 

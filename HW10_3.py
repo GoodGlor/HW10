@@ -4,14 +4,16 @@ import uuid
 
 class Authorization:
     def __init__(self):
-        self.user = []
         self.wb = openpyxl.load_workbook('user.xlsx')
         self.sheet = self.wb.active
+        self.ch_emal = [email.value for email in self.sheet['B']]
+        self.ch_password = [paswd.value for paswd in self.sheet['C']]
+        self.user = {self.ch_emal[index]: self.ch_password[index] for index in range(len(self.ch_emal))}
+        self.emal = str(input('Enter your email: ')).lower()
+
 
     def check_email(self):
-        self.emal = str(input('Enter your email: ')).lower()
-        self.ch_emal = [email.value for email in self.sheet['B']]
-        if self.emal in self.ch_emal:
+        if self.emal in self.user.keys():
             return True
         else:
             print('User with this email does not exist')
@@ -19,8 +21,7 @@ class Authorization:
 
     def check_password(self):
         self.password = str(input('Enter yor password: ')).lower()
-        self.ch_password = [paswd.value for paswd in self.sheet['C']]
-        if self.password in self.ch_password:
+        if self.user[self.emal] == self.password:
             return True
         else:
             print('Invalid password')
@@ -33,5 +34,3 @@ class Authorization:
                 break
             else:
                 continue
-
-
