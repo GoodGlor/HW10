@@ -88,5 +88,5 @@ class Registration:
                 self.sheet.append(self.user)
                 self.wb.save('user.xlsx')
                 self.user.clear()
-                print('200')
-                break
+                return '200'
+

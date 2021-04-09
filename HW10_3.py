@@ -2,6 +2,10 @@ import openpyxl
 import uuid
 
 
+class UserToken :
+    success = uuid.uuid4()
+
+
 class Authorization:
     def __init__(self):
         self.wb = openpyxl.load_workbook('user.xlsx')
@@ -30,7 +34,13 @@ class Authorization:
     def check_all(self):
         while True:
             if Authorization.check_email(self) == True and Authorization.check_password(self) == True:
-                print(f'OK -> {uuid.uuid4()}')
-                break
+                return print(f'OK -> {UserToken.success}')
             else:
                 continue
+
+
+
+
+
+
+
